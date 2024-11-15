@@ -112,6 +112,9 @@
       <AdditionalLibraryDirectories>C:\Users\jkcob\Documents\Visual Studio 2022\Libraries\glfw-3.4.bin.WIN64\lib-vc2022;I:\Vulkan\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>vulkan-1.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>call I:\VulkanProjects\VulkanKeeler\VulkanKeeler\VulkanKeeler\compile.bat</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -133,7 +136,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FirstApp.cpp" />
+    <ClCompile Include="ive_pipeline.cpp" />
+    <ClCompile Include="lve_window.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="lve_device.cpp" />
+    <ClCompile Include="lve_swap_chain.cpp" />
+    <None Include="simple_shader.frag">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FirstApp.h" />
+    <ClInclude Include="ive_pipeline.h" />
+    <ClInclude Include="lve_window.h" />
+    <ClInclude Include="lve_device.h" />
+    <ClInclude Include="lve_swap_chain.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="compile.bat" />
+    <None Include="simple_shader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
