@@ -1,5 +1,6 @@
 #include "ive_pipeline.h"
 
+#include "lve_model.h"
 
 //std
 #include <fstream>
@@ -139,7 +140,6 @@ namespace lve {
     shaderStage[0].flags = 0;
     shaderStage[0].pNext = nullptr;
     shaderStage[0].pSpecializationInfo = nullptr;
-
     shaderStage[1].sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
     shaderStage[1].stage = VK_SHADER_STAGE_FRAGMENT_BIT;
     shaderStage[1].module = fragShaderModule;
@@ -148,13 +148,14 @@ namespace lve {
     shaderStage[1].pNext = nullptr;
     shaderStage[1].pSpecializationInfo = nullptr;
 
-
+    auto bindingDescriptions = LveModel::Vertex::getBindingDescriptions();
+    auto attributeDescriptions = LveModel::Vertex::getAttributeDescriptions();
     VkPipelineVertexInputStateCreateInfo vertexInputInfo{};
     vertexInputInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
-    vertexInputInfo.vertexAttributeDescriptionCount = 0;
-    vertexInputInfo.vertexBindingDescriptionCount = 0;
-    vertexInputInfo.pVertexAttributeDescriptions = nullptr;
-    vertexInputInfo.pVertexBindingDescriptions = nullptr;
+    vertexInputInfo.vertexAttributeDescriptionCount = static_cast<uint32_t>(attributeDescriptions.size());
+    vertexInputInfo.vertexBindingDescriptionCount = static_cast<uint32_t>(bindingDescriptions.size());
+    vertexInputInfo.pVertexAttributeDescriptions = attributeDescriptions.data();
+    vertexInputInfo.pVertexBindingDescriptions = bindingDescriptions.data();
 
     VkPipelineViewportStateCreateInfo viewportInfo{};
     viewportInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;

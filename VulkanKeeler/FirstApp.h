@@ -6,6 +6,7 @@
 #include "lve_device.h"
 #include "lve_swap_chain.h"
 #include "lve_window.h"
+#include "lve_model.h"
 
 // std
 #include <memory>
@@ -25,6 +26,7 @@ namespace lve {
     FirstApp& operator =(const FirstApp&) = delete;
     void run();
   private:
+    void loadModel();
     void createPipelineLayout();
     void createPipeline();
     void createCommandBuffers();
@@ -36,6 +38,9 @@ namespace lve {
     std::unique_ptr<LvePipeline> lvePipeline;
     VkPipelineLayout pipelineLayout;
     std::vector<VkCommandBuffer> commandBuffer;
+    std::unique_ptr<LveModel> lveModel;
+
+    std::vector<LveModel::Vertex> fractal(int n, int Max, std::vector<LveModel::Vertex> lastInstance);
 
   };
 }

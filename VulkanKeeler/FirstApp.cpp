@@ -3,10 +3,12 @@
 // std
 #include <stdexcept>
 #include <array>
-
+//temp
+#include <iostream>
 namespace lve {
   FirstApp::FirstApp()
   {
+    loadModel();
     createPipelineLayout();
     createPipeline();
     createCommandBuffers();
@@ -38,6 +40,79 @@ namespace lve {
       throw std::runtime_error("failed to present swap chain image!");
     }
 
+  }
+  std::vector<LveModel::Vertex> FirstApp::fractal(int n, int Max, std::vector<LveModel::Vertex> lastInstance)
+  {
+    n++;
+    std::vector<LveModel::Vertex> local;
+    // get the points i need
+    // loop through the last points
+    // get the index mod of last index
+    // get the looped forward and backwards triangle for position data
+    // make a new triangle that has the original position and the new ones and write it to the local vector 
+
+    for (int i = 0; i < lastInstance.size(); i++) {
+
+      int vertMod = i % 3;
+      int nextIndex;
+      int lastIndex;
+      LveModel::Vertex lastVertex;
+      LveModel::Vertex nextVertex;
+      switch (vertMod) {
+      case 0:
+        nextIndex = i + 1;
+        lastIndex = i + 2;
+        break;
+      case 1:
+        nextIndex = i + 1;
+        lastIndex = i - 1;
+        break;
+      case 2:
+        nextIndex = i - 2;
+        lastIndex = i - 1;
+        break;
+      default:
+        nextIndex = i;
+        lastIndex = i;
+      }
+
+      float lastX = (((float)lastInstance[lastIndex].position.r)/ 2.0f) + ((float)lastInstance[i].position.r/ 2.0f );
+      float lastY = (((float)lastInstance[lastIndex].position.g)/ 2.0f) + ((float)lastInstance[i].position.g/ 2.0f );
+      float nextX = (((float)lastInstance[nextIndex].position.r)/ 2.0f) + ((float)lastInstance[i].position.r/ 2.0f );
+      float nextY = (((float)lastInstance[nextIndex].position.g)/ 2.0f) + ((float)lastInstance[i].position.g/ 2.0f );
+
+      lastVertex.position = glm::vec2( lastX, lastY );
+      nextVertex.position = glm::vec2( nextX, nextY);
+
+      
+      local.push_back(nextVertex);
+      local.push_back(lastVertex);
+      local.push_back(lastInstance[i]);
+
+
+
+    }
+      
+
+    if (n < Max) {
+      return fractal(n+1, Max, local);
+    }
+    else {
+      return local;
+    }
+  }
+  void FirstApp::loadModel()
+  {
+    
+    
+    std::vector<LveModel::Vertex> vertices{
+      {{0.0f, -0.5f}},
+      {{0.5f, 0.5f}},
+      {{-0.5f, 0.5f}},
+      
+    };
+    vertices =fractal(0, 5, vertices);
+    lveModel = std::make_unique<LveModel>(lveDevice, vertices);
   }
   void FirstApp::createPipelineLayout()
   {
@@ -105,7 +180,8 @@ namespace lve {
       vkCmdBeginRenderPass(commandBuffer[i], &renderpassInfo, VK_SUBPASS_CONTENTS_INLINE);
 
       lvePipeline->bind(commandBuffer[i]);
-      vkCmdDraw(commandBuffer[i], 3, 1, 0, 0);
+      lveModel->bind(commandBuffer[i]);
+      lveModel->draw(commandBuffer[i]);
 
       vkCmdEndRenderPass(commandBuffer[i]);
       if (vkEndCommandBuffer(commandBuffer[i]) != VK_SUCCESS) {
