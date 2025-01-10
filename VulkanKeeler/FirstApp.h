@@ -1,12 +1,13 @@
 #pragma once
 
 
+#include "lve_render.h"
 
-#include "ive_pipeline.h"
 #include "lve_device.h"
-#include "lve_swap_chain.h"
+
 #include "lve_window.h"
-#include "lve_model.h"
+
+#include "lve_game_object.h"
 
 // std
 #include <memory>
@@ -15,8 +16,8 @@
 namespace lve {
   class FirstApp {
   public:
-    static constexpr int WIDTH = 800;
-    static constexpr int HEIGHT = 600;
+    static constexpr int WIDTH = 1920;
+    static constexpr int HEIGHT = 1080;
 
     FirstApp();
     ~FirstApp();
@@ -26,21 +27,15 @@ namespace lve {
     FirstApp& operator =(const FirstApp&) = delete;
     void run();
   private:
-    void loadModel();
-    void createPipelineLayout();
-    void createPipeline();
-    void createCommandBuffers();
-    void drawFrame();
+    void loadGameObjects();
+
 
     LveWindow lveWindow{ WIDTH, HEIGHT, "Hello Vulkan!" };
     LveDevice lveDevice{lveWindow};
-    LveSwapChain lveSwapChain{lveDevice, lveWindow.getExtent()};
-    std::unique_ptr<LvePipeline> lvePipeline;
-    VkPipelineLayout pipelineLayout;
-    std::vector<VkCommandBuffer> commandBuffer;
-    std::unique_ptr<LveModel> lveModel;
+    LveRender lveRender{ lveWindow , lveDevice };
 
-    std::vector<LveModel::Vertex> fractal(int n, int Max, std::vector<LveModel::Vertex> lastInstance);
+    std::vector<LveGameObject> gameObjects;
+
 
   };
 }

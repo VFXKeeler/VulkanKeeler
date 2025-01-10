@@ -6,6 +6,7 @@
 #include <vulkan/vulkan.h>
 
 // std lib headers
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -16,6 +17,7 @@ class LveSwapChain {
   static constexpr int MAX_FRAMES_IN_FLIGHT = 2;
 
   LveSwapChain(LveDevice &deviceRef, VkExtent2D windowExtent);
+  LveSwapChain(LveDevice& deviceRef, VkExtent2D windowExtent, std::shared_ptr<LveSwapChain> previous);
   ~LveSwapChain();
 
   LveSwapChain(const LveSwapChain &) = delete;
@@ -38,7 +40,13 @@ class LveSwapChain {
   VkResult acquireNextImage(uint32_t *imageIndex);
   VkResult submitCommandBuffers(const VkCommandBuffer *buffers, uint32_t *imageIndex);
 
+  bool compareSwapFormat(const LveSwapChain &swapChain) const {
+    return swapChain.swapChainDepthFormat == swapChainDepthFormat &&
+      swapChain.swapChainImageFormat == swapChainImageFormat;
+  }
+
  private:
+  void init();
   void createSwapChain();
   void createImageViews();
   void createDepthResources();
@@ -54,6 +62,7 @@ class LveSwapChain {
   VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR &capabilities);
 
   VkFormat swapChainImageFormat;
+  VkFormat swapChainDepthFormat;
   VkExtent2D swapChainExtent;
 
   std::vector<VkFramebuffer> swapChainFramebuffers;
@@ -69,6 +78,7 @@ class LveSwapChain {
   VkExtent2D windowExtent;
 
   VkSwapchainKHR swapChain;
+  std::shared_ptr<LveSwapChain> oldSwapChain;
 
   std::vector<VkSemaphore> imageAvailableSemaphores;
   std::vector<VkSemaphore> renderFinishedSemaphores;

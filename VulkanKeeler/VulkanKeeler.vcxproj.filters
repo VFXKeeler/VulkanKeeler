@@ -27,7 +27,7 @@
     <ClCompile Include="FirstApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ive_pipeline.cpp">
+    <ClCompile Include="lve_pipeline.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="lve_device.cpp">
@@ -39,6 +39,15 @@
     <ClCompile Include="lve_model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="lve_game_object.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lve_render.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="simple_render_system.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lve_window.h">
@@ -47,7 +56,7 @@
     <ClInclude Include="FirstApp.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="ive_pipeline.h">
+    <ClInclude Include="lve_pipeline.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="lve_device.h">
@@ -57,6 +66,15 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="lve_model.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lve_game_object.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lve_render.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="simple_render_system.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -7,14 +7,19 @@
 #include<vector>
 namespace lve {
   struct PipelineConfigInfo {
-    VkViewport viewport;
-    VkRect2D scissor;
+    PipelineConfigInfo(const PipelineConfigInfo&) = delete;
+    PipelineConfigInfo& operator=(const PipelineConfigInfo&) = delete;
+
+
+    VkPipelineViewportStateCreateInfo viewportInfo;
     VkPipelineInputAssemblyStateCreateInfo inputAssemblyInfo;
     VkPipelineRasterizationStateCreateInfo rasterizationInfo;
     VkPipelineMultisampleStateCreateInfo multisampleInfo;
     VkPipelineColorBlendAttachmentState colorBlendAttachment;
     VkPipelineColorBlendStateCreateInfo colorBlendInfo;
     VkPipelineDepthStencilStateCreateInfo depthStencilInfo;
+    std::vector<VkDynamicState> dynamicStateEnables;
+    VkPipelineDynamicStateCreateInfo dynamicStateInfo;
     VkPipelineLayout pipelineLayout = nullptr;
     VkRenderPass renderPass = nullptr;
     uint32_t subpass = 0;
@@ -25,10 +30,10 @@ namespace lve {
     ~LvePipeline();
 
     LvePipeline(const LvePipeline&) = delete;
-    void operator = (const LvePipeline&) = delete;
-
+    LvePipeline &operator = (const LvePipeline&) = delete;
+    LvePipeline() = default;
     void bind(VkCommandBuffer commandBuffer);
-    static PipelineConfigInfo defaultPipelineConfigInfo(uint32_t width, uint32_t height);
+    static void defaultPipelineConfigInfo(PipelineConfigInfo& configInfo);
   private:
     static std::vector<char> readFile(const std::string& filepath);
     void createGraphicsPipeline(const std::string& vertFilePath, const std::string& fragFilePath, const PipelineConfigInfo& configInfo);
