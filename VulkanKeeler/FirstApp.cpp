@@ -1,5 +1,7 @@
 #include "FirstApp.h"
 
+#include "keyboard_movement_controller.h"
+#include "lve_camera.h"
 #include "simple_render_system.h"
 
 // libs
@@ -11,6 +13,7 @@
 // std
 #include <stdexcept>
 #include <array>
+#include <chrono>
 //temp
 #include <iostream>
 #include <random>
@@ -25,17 +28,34 @@ namespace lve {
   void FirstApp::run() {
     
     SimpleRenderSystem simpleRenderSystem{ lveDevice, lveRender.getSwapChainRenderPass() };
+    LveCamera camera{};
+  
+
+    auto viewerObject = LveGameObject::createGameObject();
+    KeyboardMovementController cameraController{};
+
+    auto currentTime = std::chrono::high_resolution_clock::now();
 
     while (!lveWindow.shouldClose()) {
       glfwPollEvents();
 
+      auto newTime = std::chrono::high_resolution_clock::now();
+      float frameTime = std::chrono::duration<float, std::chrono::seconds::period>(newTime - currentTime).count();
+      currentTime = newTime;
+
+      cameraController.moveInPlaneXZ(lveWindow.getGLFWwindow(), frameTime, viewerObject);
+      camera.setViewYXZ(viewerObject.transform.translation, viewerObject.transform.rotation);
+
+      float aspect = lveRender.getAspectRatio();
+      //camera.setOrthographicProjection(-aspect, aspect, -1, 1, -1, 1);
+      camera.setPerspectiveProjection(glm::radians(50.f), aspect, 0.1f, 10.f);
       if (auto commandBuffer = lveRender.beginFrame()) {
        
 
         // render system
         lveRender.beginSwapChainRenderPass(commandBuffer);
 
-        simpleRenderSystem.renderGameObjects(commandBuffer, gameObjects);
+        simpleRenderSystem.renderGameObjects(commandBuffer, gameObjects, camera);
         lveRender.endSwapChainRenderPass(commandBuffer);
         lveRender.endFrame();
       }
@@ -108,7 +128,7 @@ namespace lve {
 
     auto cube = LveGameObject::createGameObject();
     cube.model = lveModel;
-    cube.transform.translation = { .0f,.0f,.5f };
+    cube.transform.translation = { .0f,.0f,2.5f };
     cube.transform.scale = { .5f,.5f,.5f };
     gameObjects.push_back(std::move(cube));
 
