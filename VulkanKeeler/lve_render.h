@@ -32,7 +32,7 @@ namespace lve {
       assert(isFrameStarted && "Cannot get command buffer when frame not in progess");
       return commandBuffers[currentFrameIndex]; }
 
-    int getFraemIndex() const {
+    int getFrameIndex() const {
       assert(isFrameStarted && "Cannot get frame index when frame not in progess");
       return currentFrameIndex;
     }

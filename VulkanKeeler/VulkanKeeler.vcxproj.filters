@@ -16,6 +16,9 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{b96b8d75-ad85-40fc-a159-7b4a7adddcd1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\systems">
+      <UniqueIdentifier>{bb6bcb3c-aa96-4bc1-93b1-446efb4166a1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -45,14 +48,23 @@
     <ClCompile Include="lve_render.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="simple_render_system.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="lve_camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="keyboard_movement_controller.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lve_buffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lve_descriptors.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="system\simple_render_system.cpp">
+      <Filter>Source Files\systems</Filter>
+    </ClCompile>
+    <ClCompile Include="system\point_light_system.cpp">
+      <Filter>Source Files\systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -80,24 +92,45 @@
     <ClInclude Include="lve_render.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="simple_render_system.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="lve_camera.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="keyboard_movement_controller.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="lve_utils.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lve_buffer.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lve_frame_info.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lve_descriptors.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="system\simple_render_system.h">
+      <Filter>Source Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="system\point_light_system.h">
+      <Filter>Source Files\systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="simple_shader.vert">
+    <None Include="shaders\simple_shader.vert">
       <Filter>Shaders</Filter>
     </None>
     <None Include="compile.bat">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="simple_shader.frag">
+    <None Include="shaders\simple_shader.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\point_light.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\point_light.frag">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

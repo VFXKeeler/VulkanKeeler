@@ -5,6 +5,12 @@ VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VulkanKeeler", "VulkanKeeler\VulkanKeeler.vcxproj", "{9C238176-F265-4EA5-993B-FA9DF5E36132}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A4589171-B0E7-435E-808D-2F105E580F1F}"
+	ProjectSection(SolutionItems) = preProject
+		Models\colored_cube.obj = Models\colored_cube.obj
+		quad.obj = quad.obj
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64

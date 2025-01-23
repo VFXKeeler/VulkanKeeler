@@ -21,7 +21,6 @@ namespace lve {
 
   void LvePipeline::bind(VkCommandBuffer commandBuffer)
   {
-   
     vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, graphicsPipeline);
   }
 
@@ -97,6 +96,8 @@ namespace lve {
     configInfo.dynamicStateInfo.dynamicStateCount = static_cast<uint32_t>(configInfo.dynamicStateEnables.size());
     configInfo.dynamicStateInfo.flags = 0;
 
+    configInfo.bindingDescriptions = LveModel::Vertex::getBindingDescriptions();
+    configInfo.attributeDescriptions = LveModel::Vertex::getAttributeDescriptions();
   }
 
   std::vector<char> LvePipeline::readFile(const std::string& filepath) {
@@ -147,8 +148,8 @@ namespace lve {
     shaderStage[1].pNext = nullptr;
     shaderStage[1].pSpecializationInfo = nullptr;
 
-    auto bindingDescriptions = LveModel::Vertex::getBindingDescriptions();
-    auto attributeDescriptions = LveModel::Vertex::getAttributeDescriptions();
+    auto& bindingDescriptions = configInfo.bindingDescriptions;
+    auto& attributeDescriptions = configInfo.attributeDescriptions;
     VkPipelineVertexInputStateCreateInfo vertexInputInfo{};
     vertexInputInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
     vertexInputInfo.vertexAttributeDescriptionCount = static_cast<uint32_t>(attributeDescriptions.size());
