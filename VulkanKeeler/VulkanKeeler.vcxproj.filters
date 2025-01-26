@@ -66,6 +66,12 @@
     <ClCompile Include="system\point_light_system.cpp">
       <Filter>Source Files\systems</Filter>
     </ClCompile>
+    <ClCompile Include="system\pbr_system.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lve_texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lve_window.h">
@@ -116,6 +122,12 @@
     <ClInclude Include="system\point_light_system.h">
       <Filter>Source Files\systems</Filter>
     </ClInclude>
+    <ClInclude Include="system\pbr_system.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lve_texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\simple_shader.vert">
@@ -133,5 +145,12 @@
     <None Include="shaders\point_light.frag">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="shaders\pbr_shader.frag" />
+    <None Include="shaders\pbr_shader.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="textures\texture.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

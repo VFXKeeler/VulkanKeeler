@@ -133,8 +133,6 @@ VkResult LveSwapChain::submitCommandBuffers(
   return result;
 }
 
-
-
 void LveSwapChain::createSwapChain() {
   SwapChainSupportDetails swapChainSupport = device.getSwapChainSupport();
 

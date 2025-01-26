@@ -101,6 +101,7 @@ namespace lve {
       0,
       nullptr);
 
+
     for (auto& kv : frameInfo.gameObjects) {
       auto& obj = kv.second;
       if (obj.pointLight == nullptr) continue;
@@ -117,8 +118,9 @@ namespace lve {
         0,
         sizeof(PointLightPushConstants),
         &push);
+      vkCmdDraw(frameInfo.commandBuffer, 6, 1, 0, 0);
     }
-    vkCmdDraw(frameInfo.commandBuffer, 6, 1, 0, 0);
+ 
   }
 
 }  // namespace lve

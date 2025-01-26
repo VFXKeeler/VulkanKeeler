@@ -33,6 +33,7 @@ namespace lve {
 
     VkBuffer getBuffer() const { return buffer; }
     void* getMappedMemory() const { return mapped; }
+
     uint32_t getInstanceCount() const { return instanceCount; }
     VkDeviceSize getInstanceSize() const { return instanceSize; }
     VkDeviceSize getAlignmentSize() const { return instanceSize; }

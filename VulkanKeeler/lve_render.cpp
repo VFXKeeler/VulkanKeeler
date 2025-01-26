@@ -10,7 +10,6 @@
 
 namespace lve {
 
-
   LveRender::LveRender(LveWindow& window, LveDevice& device) : lveWindow{ window }, lveDevice{ device }
   {
     recreateSwapChain();
@@ -22,8 +21,6 @@ namespace lve {
     freecommandBuffers();
   }
   
-
-
   void LveRender::recreateSwapChain() {
     auto extent = lveWindow.getExtent();
     while (extent.height == 0 || extent.width == 0) {
@@ -51,8 +48,6 @@ namespace lve {
 
   }
 
-
-
   void LveRender::createCommandBuffers()
   {
 
@@ -78,8 +73,6 @@ namespace lve {
     vkFreeCommandBuffers(lveDevice.device(), lveDevice.getCommandPool(), static_cast<uint32_t>(commandBuffers.size()), commandBuffers.data());
     commandBuffers.clear();
   }
-
-
 
   VkCommandBuffer lve::LveRender::beginFrame()
   {
@@ -125,7 +118,6 @@ namespace lve {
   }
 
   
-
   void lve::LveRender::beginSwapChainRenderPass(VkCommandBuffer commandBuffer)
   {
     assert(isFrameStarted && "Can't call beginSwapChainRenderPiss if frame is not in progress");

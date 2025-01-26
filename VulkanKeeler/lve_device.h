@@ -71,7 +71,7 @@ class LveDevice {
       VkDeviceMemory &imageMemory);
 
   VkPhysicalDeviceProperties properties;
-
+  VkPhysicalDevice getPhysicalDevice() { return physicalDevice; };
  private:
   void createInstance();
   void setupDebugMessenger();
@@ -97,6 +97,7 @@ class LveDevice {
   VkCommandPool commandPool;
 
   VkDevice device_;
+  
   VkSurfaceKHR surface_;
   VkQueue graphicsQueue_;
   VkQueue presentQueue_;

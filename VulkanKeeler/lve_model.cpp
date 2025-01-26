@@ -4,6 +4,7 @@
 //lib
 #define TINYOBJLOADER_IMPLEMENTATION
 #include <tiny_obj_loader.h>
+
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/hash.hpp>
 // std
@@ -28,6 +29,7 @@ namespace lve {
   LveModel::LveModel(LveDevice& device, const LveModel::Builder& builder) : lveDevice{ device } {
     createVertexBuffers(builder.vertices);
     createIndexBuffers(builder.indices);
+
   }
 
   LveModel::~LveModel() {  }
@@ -88,6 +90,7 @@ namespace lve {
     lveDevice.copyBuffer(stagingBuffer.getBuffer(), indexBuffer->getBuffer(), bufferSize);
 
   }
+ 
   void LveModel::draw(VkCommandBuffer commandBuffer)
   {
     if(hasIndexBuffer)

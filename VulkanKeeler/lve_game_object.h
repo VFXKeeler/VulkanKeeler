@@ -39,7 +39,7 @@ namespace lve {
     }
 
     static LveGameObject makePointLight(
-      float intensity = 10.f, float radius = 0.1f, glm::vec3 color = glm::vec3(1.f));
+      float intensity = 30.f, float radius = 0.05f, glm::vec3 color = glm::vec3(1.f));
 
     LveGameObject(const LveGameObject&) = delete;
     LveGameObject& operator=(const LveGameObject&) = delete;
